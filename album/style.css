@@ -1,0 +1,56 @@
+html, input[type="text"] {
+    background-color: #7FFFD4;
+}
+
+h1{
+    text-align: center;
+}
+
+#rules{
+    text-align: center;
+}
+
+#app{
+right: 40%;
+left: 38%;
+position: absolute;
+top: 21%;
+}
+
+#Warning {
+  visibility: hidden;
+  margin-right: 50%;
+  margin-left: 38%;
+  position: absolute;
+  width: 50%;
+  top: 17%;
+  color: coral;
+  font-family: 'Roboto Mono', monospace;
+}
+
+li,#app,#rules,button,h1{
+font-family: 'Roboto Mono', monospace;
+color: coral;
+}
+
+
+input[type="text"]{
+    color: coral;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: coral;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: coral;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: coral;
+  }
+
+button{
+    color: black;
+}

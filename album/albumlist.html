@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Best Albums</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src='https://unpkg.com/babel-standalone@6/babel.min.js'></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@1,100&display=swap" rel="stylesheet">
+  <link href="album/style.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Album List</h1>
+    <div id = "rules">Please enter you favorite album and band in the box below</div>
+  <div id='app'></div>
+  <div id="Warning">Please enter a album</div>
+
+  <script type='text/babel'>
+
+    function AlbumList(props){
+      return(
+        <ul>
+        {props.list.map((albumname) => (
+          <li key={albumname}>
+            <span>{albumname}</span>
+            <button onClick={() => props.onRemoveAlbum(albumname)}>Remove</button>
+          </li>
+        ))}
+        </ul>
+      )
+    }
+
+      class App extends React.Component{
+        constructor(props){
+          super(props)
+
+          this.state = {
+            albums: [],
+            input: '',
+          }
+          this.handleRemoveAlbum = this.handleRemoveAlbum.bind(this)
+          this.updateInput = this.updateInput.bind(this)
+          this.handleAddAlbum = this.handleAddAlbum.bind(this)
+        }
+
+        handleAddAlbum(){
+          this.setState((currentState)=>{
+            console.log("this.state.input.length is " + this.state.input.length);
+            //alerts us that users have not sent in a name
+            if (this.state.input.length == 0){
+              console.log("Please enter a name");
+              //will show warning to user
+              document.getElementById("Warning").style.visibility = "visible";
+            } else {
+              //will hide warning to user when they enter a name
+              document.getElementById("Warning").style.visibility = "hidden";
+            return{
+              //sets new album to be show and returns the input to be blank 
+              albums: currentState.albums.concat([this.state.input]),
+            input: '',
+            }
+          }
+          })
+        }
+
+        handleRemoveAlbum(albumname){
+
+          this.setState((currentState) => {
+            return{
+                albums: currentState.albums.filter((album) => album !== albumname )
+            }
+
+          })
+
+        }
+        updateInput(e){
+          const value = e.target.value
+          this.setState(()=>({
+            input: value
+
+          }))
+
+
+
+        }
+        render(){
+        return (
+          <div>
+          <input type='text' placeholder='name of album - artist ' value={this.state.input} onChange={this.updateInput}/>
+            <button onClick={this.handleAddAlbum}>Submit</button>
+          <AlbumList
+           list={this.state.albums}
+           onRemoveAlbum={this.handleRemoveAlbum}
+           />
+          </div>
+        )
+      }
+  }
+
+
+    ReactDOM.render(
+      <App/>,
+      document.getElementById('app')
+    )
+  </script>
+</body>
+</html>
+
